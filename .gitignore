@@ -1,0 +1,26 @@
+vendor
+definitions
+.idea
+data
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+teacupapi
+swagger.json
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+*.log
+*.local.ini
+.DS_Store
+utils/.DS_Store
+service/.DS_Store
+libs/.DS_Store
+db/.DS_Store
+controllers/.DS_Store

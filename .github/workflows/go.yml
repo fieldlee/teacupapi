@@ -1,0 +1,42 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check Go filename
+      run: scripts/check_go_file.sh
+      shell: bash
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.17
+
+    - name: Test
+      run: go test -v ./...
+
+    - name: Build
+      run: go build -v ./...
+
+  swagger:
+    runs-on: ubuntu-latest
+    container: quay.io/goswagger/swagger
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Swagger spec
+      run: swagger generate spec -m -o ./swagger.json
+    - name: Upload spec
+      uses: actions/upload-artifact@v3
+      with:
+        name: swagger.json
+        path: swagger.json
